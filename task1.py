@@ -68,22 +68,12 @@ def simulation(mfp=1, vel=1, tsteps=1000, eps=0.0001):
 def plot(msd, totaltime, vel, mfp):
     tsteps = len(msd)
     deltaT = totaltime / tsteps
-#     linestart = 0
-# 
-#     def line(x, a, b):
-#         return a*x + b
-# 
-#     popt, pcov = curve_fit(f=line,\
-#             xdata=np.arange(linestart, tsteps),\
-#             ydata=msd[linestart:])
 
     sns.set(context='notebook', style='darkgrid')
     fig, ax = plt.subplots(figsize=(8, 8))
     
     time = np.arange(0, totaltime, deltaT)
     ax.plot(time, msd)
-    # ax.plot(time, line(time, *popt),\
-    #         label=r'Curve Fit: $D = %.3f, \sigma^2 = %.5f$'%(popt[0] / 6, pcov[0][0]))
     D = mfp * vel / 3
     ax.plot(time, time * 6 * D,\
             label=r'$\Delta r^2(t) = 6Dt,\quad D = \frac{\lambda v_T}{3} = %.3f$'%(D))
@@ -122,7 +112,7 @@ def average(msd, time, deltaT):
     return msdAvg, totaltime
 
 tsteps = 1000
-npart = 100
+npart = 1000
 eps = 0.0001
 mfp = 1
 vel = 1
@@ -135,5 +125,4 @@ for i in range(npart):
 
 msdAvg, totaltime = average(msd, time, deltaT)
 
-# plot(np.average(msd, axis=0), time, vel, mfp)
 plot(msdAvg, totaltime, vel, mfp)
