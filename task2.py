@@ -113,7 +113,7 @@ def average(msd, time, deltaT):
     msdAvg /= npart
     return msdAvg, totaltime
 
-def error(msdAvg, totaltime, vel, mfp):
+def variance(msdAvg, totaltime, vel, mfp):
     tsteps = len(msdAvg)
     deltaT = totaltime / tsteps
     D = mfp * vel / 3
@@ -133,7 +133,7 @@ vel = 1
 deltaT = 10 * mfp / vel
 k = 0
 start = 10
-end = 1000
+end = 1500
 step = 5
 sigmasq = np.zeros(int((end - start) / step))
 
@@ -145,8 +145,8 @@ for npart in range(start, end, step):
         msd[i], time[i] = simulation(mfp, vel, tsteps, eps)
 
     msdAvg, totaltime = average(msd, time, deltaT)
-    sigmasq[k] = error(msdAvg, totaltime, vel, mfp)
-    # print(npart, sigmasq[k], np.sqrt(npart)**(-1))
+    sigmasq[k] = variance(msdAvg, totaltime, vel, mfp)
+    print(npart, sigmasq[k])
     k += 1
 
 plot(sigmasq, start, end, step)
