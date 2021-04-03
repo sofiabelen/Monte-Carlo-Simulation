@@ -73,17 +73,19 @@ def plot(sigmasq, start, end, step):
         return a / np.sqrt(k)
 
     x = np.arange(start, end, step)
+    x2 = np.arange(start, end, 5)
 
     popt, pcov = curve_fit(f=f, xdata=x, ydata=sigmasq)
     
-    ax.plot(x, sigmasq, label=r'$\sigma^2_{rel}(K)$')
-    ax.plot(x, f(x, *popt),\
-            label=r'$\frac{%.3f}{\sqrt{K}}$'%popt[0])
+    ax.plot(x, sigmasq, label=r'$\sigma_{rel}(K)$')
+    ax.plot(x2, f(x2, *popt),\
+            label=r'$\frac{\alpha}{\sqrt{K}}$')
 
     ax.set_xlabel(r'$K$ (Number of Particles)')
-    ax.set_ylabel(r'$\sigma^2_{rel}(K)$')
+    ax.set_ylabel(r'$\sigma_{rel}(K)$')
     
     ax.legend()
+    ax.ticklabel_format(style='sci')
     
     fig.savefig("media/task2.pdf")
     fig.savefig("media/task2.svg")
@@ -102,7 +104,7 @@ def average(msd, time, deltaT):
     msdAvg = np.zeros(tsteps2)
 
     for i in range(npart):
-        t = 0
+        t = deltaT
         k = 0
         for j in range(tsteps):
             if time[i][j] > t and k < tsteps2:
@@ -121,8 +123,8 @@ def variance(msdAvg, totaltime, vel, mfp):
 
     for i in range(tsteps):
         t = (i + 1) * deltaT
-        sigmasq += (msdAvg[i] - 6 * D * t)**2 / (6 * D * t)**2
-    sigmasq /= tsteps
+        sigmasq += abs(msdAvg[i] - 6 * D * t)
+    sigmasq /= tsteps * (6 * D * t)**2
 
     return sigmasq
 
@@ -133,9 +135,9 @@ vel = 1
 deltaT = 10 * mfp / vel
 k = 0
 start = 10
-end = 1500
+end = 1011
 step = 5
-sigmasq = np.zeros(int((end - start) / step))
+sigmasq = np.zeros((end - start - 1) // step + 1)
 
 for npart in range(start, end, step):
     msd = np.zeros((npart, tsteps))
