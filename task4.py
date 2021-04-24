@@ -118,12 +118,5 @@ for i in range(len(times)):
     print("Total particles at time t = ", times[i],
             " -> N = ", np.sum(distro[i]))
 
-# for i in range(nx * 2):
-#     for j in range(nx * 2):
-#         if distro[0][i][j] != 0:
-#             # print(distro[0][i][j], end = ' ')
-#             print(i, j)
-#     # print("")
-
 for i in range(len(times)):
     plot(distro[i], totalx, nx, i, times[i])
