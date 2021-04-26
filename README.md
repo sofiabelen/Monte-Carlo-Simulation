@@ -1,13 +1,19 @@
-# Determination of the Diffusion Coefficient using Monte Carlo Method
+# Monte Carlo Simulation of Electrons Diffusion in a Noble Gas
+
+- `task1.py` - Calculation of the Diffusion Coefficient for isotrpic scattering
+- `task2.py` - Error Analysis
+- `task3.py` - MSD for Different Differential Electron-Scattering Cross Sections
+- `task4.py` - Distribution Function
+- `task5.py` - Distribution Function Cross Sections
 
 ## Distribution Function
 ![Alt text](media/task4.gif)
 
-## Mean Squared Displacement
+## Calculation of the Diffusion Coefficient
 We verify the Stokes-Einstein law for diffusion.
 ![Alt text](media/task1.png)
 
-## Monte Carlo Error Analysis
+## Error Analysis
 ![Alt text](media/task2.png)
 
 ## MSD for Different Differential Electron-Scattering Cross Sections
