@@ -3,7 +3,7 @@
 Monte Carlo simulation of electrons diffusion in a noble gas under the assumption of isotropic elastic scattering of electrons on atoms.
 
 
-- `task1.py` - Calculation of the Diffusion Coefficient for isotrpic scattering
+- `task1.py` - Calculation of the Diffusion Coefficient for isotropic scattering
 - `task2.py` - Error Analysis
 - `task3.py` - MSD for Different Differential Electron-Scattering Cross Sections
 - `task4.py` - Distribution Function
